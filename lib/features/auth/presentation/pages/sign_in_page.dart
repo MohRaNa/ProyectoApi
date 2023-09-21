@@ -49,60 +49,6 @@ class _SignInPageState extends State<SignInPage> {
               height: 10,
             ),
             Column(
-              children: const [
-                MyButton(
-                  iconUrl: 'assets/images/ic_google.png',
-                  text: "Log in with Google",
-                ),
-                SizedBox(height: 20),
-                MyButton(
-                  iconUrl: 'assets/images/ic_facebook.png',
-                  text: "Log in with Google",
-                ),
-                SizedBox(height: 20),
-                Text(
-                  "Or",
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-              ],
-            ),
-            Form(
-              key: _signInGlobalKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: emailController,
-                    validator: AuthValidator.isEmailValid,
-                    decoration:
-                        const InputDecoration(hintText: "email address"),
-                  ),
-                  const SizedBox(height: 30),
-                  TextFormField(
-                    controller: passwordController,
-                    obscureText: passwordSee,
-                    validator: AuthValidator.isPasswordValid,
-                    decoration: InputDecoration(
-                      hintText: "password",
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          passwordSee = !passwordSee;
-                          setState(() {});
-                        },
-                        child: Icon(
-                          passwordSee
-                              ? Icons.visibility_off_outlined
-                              : Icons.visibility_outlined,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 100),
-            Column(
               children: [
                 MyButtonTwo(text: "Log in", onPressed: signIn),
                 const SizedBox(height: 30),
