@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ui_one/features/auth/presentation/pages/admin_page.dart';
-import 'package:ui_one/features/auth/presentation/pages/main_home.dart';
-
 import 'package:ui_one/features/auth/presentation/pages/app_widget.dart';
 import 'package:ui_one/features/auth/presentation/validator/auth_validator.dart';
 import 'package:ui_one/service._locator.dart';
@@ -33,7 +31,7 @@ class _SignInPageState extends State<SignInPage> {
           children: [
             const SizedBox(
               width: 100,
-              height: 10,
+              height: 100,
             ),
             const Center(
               child: Text(
@@ -46,8 +44,62 @@ class _SignInPageState extends State<SignInPage> {
             ),
             const SizedBox(
               width: 100,
-              height: 10,
+              height: 100,
             ),
+            Column(
+              children: const [
+                MyButton(
+                  iconUrl: 'assets/images/ic_google.png',
+                  text: "Log in with Google",
+                ),
+                SizedBox(height: 20),
+                MyButton(
+                  iconUrl: 'assets/images/ic_facebook.png',
+                  text: "Log in with Google",
+                ),
+                SizedBox(height: 20),
+                Text(
+                  "Or",
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+            Form(
+              key: _signInGlobalKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: emailController,
+                    validator: AuthValidator.isEmailValid,
+                    decoration:
+                        const InputDecoration(hintText: "email address"),
+                  ),
+                  const SizedBox(height: 30),
+                  TextFormField(
+                    controller: passwordController,
+                    obscureText: passwordSee,
+                    validator: AuthValidator.isPasswordValid,
+                    decoration: InputDecoration(
+                      hintText: "password",
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          passwordSee = !passwordSee;
+                          setState(() {});
+                        },
+                        child: Icon(
+                          passwordSee
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 100),
             Column(
               children: [
                 MyButtonTwo(text: "Log in", onPressed: signIn),
@@ -90,8 +142,7 @@ class _SignInPageState extends State<SignInPage> {
         AppWidget.isLogin = true;
         AppWidget.loggedUser["email"] = emailController.text.trim();
         AppWidget.loggedUser["password"] = passwordController.text.trim();
-        //Navigator.pushNamed(context, AdminPage.id);
-        Navigator.pushNamed(context, MyApp.id);
+        Navigator.pushNamed(context, AdminPage.id);
       }
     }
   }
